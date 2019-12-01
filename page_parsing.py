@@ -26,6 +26,12 @@ def process_page(link, i):
     
     tuple_data = []
     tuple_data_page = []
+    try:
+        html = urlopen(link+i+"&page=")
+    except:
+        print(logging.error("connection failed at page:", link))
+    finally:
+        html = urlopen(link+i+"&page=")
     html = urlopen(link+i+"&page=")
     bs = BeautifulSoup(html, 'html.parser')
     list_prod_id = bs.find_all(attrs={"data-seller-product-id": re.compile('.*')})
